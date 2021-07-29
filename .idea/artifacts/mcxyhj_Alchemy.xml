@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="mcxyhj_Alchemy">
+    <output-path>$PROJECT_DIR$/../../插件库</output-path>
+    <root id="archive" name="mcxyhj_Alchemy.jar">
+      <element id="module-output" name="mcxyhj_alchemy" />
+    </root>
+  </artifact>
+</component>
