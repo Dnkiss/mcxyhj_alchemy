@@ -5,7 +5,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 public interface AlchemyRecipe {
-    public String getDisplayName();
+    public String getName();
     public List<ItemStack> getRawMaterial();
     public List<ItemStack> getResult();
 }

@@ -6,11 +6,14 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Beacon;
 import org.bukkit.block.Block;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class AlchemyManager {
@@ -47,6 +50,59 @@ public class AlchemyManager {
             p.getInventory().addItem(itemStack);
         }
         p.setHealth(0);
+    }
+
+    public boolean canDoEnchant(Player p){
+        ItemStack mainHand = p.getInventory().getItemInMainHand();
+        ItemStack offHand = p.getInventory().getItemInOffHand();
+        ItemStack enchantStone = Alchemy.alchemyItem.getEnchantStone();
+        if(mainHand.getType().equals(Material.ENCHANTED_BOOK)){
+            EnchantmentStorageMeta enchantmentStorageMeta = (EnchantmentStorageMeta) mainHand.getItemMeta();
+            Map<Enchantment,Integer> enchant = enchantmentStorageMeta.getStoredEnchants();
+            if(enchant.size() == 1){
+                //效率
+                if(enchant.containsKey(Enchantment.DIG_SPEED)){
+                    //5-7，消耗一颗附魔石
+                    if(enchant.get(Enchantment.DIG_SPEED)>=5 && enchant.get(Enchantment.DIG_SPEED)<7){
+                        enchantStone.setAmount(1);
+                        return offHand.equals(enchantStone);
+                    }
+                    //7-9,消耗八颗附魔石
+                    if(enchant.get(Enchantment.DIG_SPEED)>=7 && enchant.get(Enchantment.DIG_SPEED)<9){
+                        enchantStone.setAmount(8);
+                        return offHand.equals(enchantStone);
+                    }
+                    //9-n,每级翻倍
+                    if(enchant.get(Enchantment.DIG_SPEED)>=9){
+                        enchantStone.setAmount((int) (8 * Math.pow((enchant.get(Enchantment.DIG_SPEED)-8),2)));
+                        return offHand.equals(enchantStone);
+                    }
+                }
+                //锋利
+                if(enchant.containsKey(Enchantment.DAMAGE_ALL)){
+                    //5级开始，从1颗开始，每级增加一颗消耗
+                    if(enchant.get(Enchantment.DAMAGE_ALL)>=5){
+                        enchantStone.setAmount(enchant.get(Enchantment.DAMAGE_ALL)-4);
+                        return offHand.equals(enchantStone);
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    public void doEnchant(Player p){
+        ItemStack mainHand = p.getInventory().getItemInMainHand();
+        EnchantmentStorageMeta enchantmentStorageMeta = (EnchantmentStorageMeta) mainHand.getItemMeta();
+        Map<Enchantment,Integer> enchant = enchantmentStorageMeta.getStoredEnchants();
+        enchant.forEach((k,v)->{
+            enchantmentStorageMeta.removeStoredEnchant(k);
+            enchantmentStorageMeta.addStoredEnchant(k,v+1,true);
+        });
+        mainHand.setItemMeta(enchantmentStorageMeta);
+        p.getInventory().setItemInMainHand(mainHand);
+        p.getInventory().setItemInOffHand(new ItemStack(Material.AIR));
+
     }
 
 }

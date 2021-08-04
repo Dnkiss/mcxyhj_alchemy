@@ -12,10 +12,12 @@ public class AlchemyCommand implements CommandExecutor {
         if(args[0].equalsIgnoreCase("test")){
             if(p.hasPermission("mcxyhj.alchemy.admin")){
                 p.getInventory().addItem(Alchemy.alchemyItem.getAlchemyPickaxe_1());
-                p.getInventory().addItem(Alchemy.alchemyItem.getAlchemyStone_1());
                 p.getInventory().addItem(Alchemy.alchemyItem.getAlchemyWood());
+                p.getInventory().addItem(Alchemy.alchemyItem.getAlchemyStone_1());
                 p.getInventory().addItem(Alchemy.alchemyItem.getAlchemyStone_2());
-                p.sendMessage("已将所有Alchemy道具置于背包内，共3件");
+                p.getInventory().addItem(Alchemy.alchemyItem.getAlchemyStone_3());
+                p.getInventory().addItem(Alchemy.alchemyItem.getEnchantStone());
+                p.sendMessage("已将所有Alchemy道具置于背包内，共7件");
             }
             else{
                 p.sendMessage("你没有权限获取测试道具");
@@ -36,7 +38,15 @@ public class AlchemyCommand implements CommandExecutor {
                 p.sendMessage("这件物品不在任何炼金纪录内，请检查你输入的名字是否正确");
             }
             return true;
-        }else if(args[0].equalsIgnoreCase("list")){
+        }else if(args[0].equalsIgnoreCase("enchant")){
+            if(Alchemy.alchemyManager.canDoEnchant(p)) {
+                Alchemy.alchemyManager.doEnchant(p);
+                p.sendMessage("§a附魔成功了！");
+            }else{
+                p.sendMessage("§4附魔过程出错了，可能是材料并没有准备好!");
+            }
+            return true;
+        } else if(args[0].equalsIgnoreCase("list")){
             p.sendMessage("目前已知炼金产物名称如下");
             Alchemy.recipeManager.allRecipe.forEach(name ->{
                 p.sendMessage("§a"+name);

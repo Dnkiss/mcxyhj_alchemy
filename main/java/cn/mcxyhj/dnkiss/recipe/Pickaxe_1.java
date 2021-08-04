@@ -12,7 +12,7 @@ public class Pickaxe_1 implements AlchemyRecipe {
 
 
     @Override
-    public String getDisplayName() {
+    public String getName() {
         return "一级魔法镐";
     }
 

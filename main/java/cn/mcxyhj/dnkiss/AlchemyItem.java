@@ -1,5 +1,6 @@
 package cn.mcxyhj.dnkiss;
 
+import net.md_5.bungee.api.chat.hover.content.Item;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -34,6 +35,14 @@ public class AlchemyItem {
         return createItemStack(Material.DARK_OAK_WOOD,"§a蕴含着魔法力量的原木",lore);
     }
 
+    public ItemStack getEnchantStone(){
+        List<String> lore = new ArrayList<>();
+        lore.add("§7用于提高附魔等级突破上限");
+        lore.add("§7目前支持提升的附魔请使用/alchemy enchantlist查询");
+        lore.add("§7任何对此物件的改变都会使其魔法力量无效");
+        return createItemStack(Material.DIAMOND,"§a附魔石",lore);
+    }
+
     public ItemStack getAlchemyStone_1(){
         List<String> lore = new ArrayList<>();
         lore.add("§7初级炼金石，可为炼金术或炼金工具提供魔法能量");
@@ -48,10 +57,28 @@ public class AlchemyItem {
         return createItemStack(Material.EMERALD,"§a中级炼金石",lore);
     }
 
+    public ItemStack getAlchemyStone_3(){
+        List<String> lore = new ArrayList<>();
+        lore.add("§7高级炼金石，可为炼金术或炼金工具提供魔法能量");
+        lore.add("§7任何对此物件的改变都会使其魔法力量无效");
+        return createItemStack(Material.EMERALD,"§a高级炼金石",lore);
+    }
+
+    //-----------------------------------------------------------------
+
     public ItemStack getAlchemyPickaxe_1(){
         List<String> lore = new ArrayList();
         lore.add("§7一级魔法镐，可从深层煤矿石中采集炼金石");
         lore.add("§7任何对此物件的改变都会使其魔法力量无效");
         return createItemStack(Material.WOODEN_PICKAXE,"§a一级魔法镐",lore);
+    }
+
+    //-----------------------------------------------------------------
+
+    public ItemStack getUltimateHelmet(){
+        List<String> lore = new ArrayList<>();
+        lore.add("§7终极头盔，消耗高级炼金石，免疫一次伤害，并使攻击者获得全部伤害反弹");
+        lore.add("§7任何对此物件的改变都会使其魔法力量无效");
+        return createItemStack(Material.TURTLE_HELMET,"§d终极头盔",lore);
     }
 }

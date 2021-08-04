@@ -1,7 +1,7 @@
   name: Alchemy
   main: cn.mcxyhj.dnkiss.Alchemy
   api-version: 1.17
-  version: 0.1
+  version: 0.2
   commands:
     Alchemy:
       description: a command to use Alchemy
