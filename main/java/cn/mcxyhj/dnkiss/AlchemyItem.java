@@ -27,6 +27,23 @@ public class AlchemyItem {
         return itemStack;
     }
 
+    public List<ItemStack> getAllItem(){
+        List<ItemStack> itemStacks = new ArrayList<>();
+        itemStacks.add(this.getAlchemyWood());
+        itemStacks.add(this.getAlchemyStone_1());
+        itemStacks.add(this.getAlchemyStone_2());
+        itemStacks.add(this.getAlchemyStone_3());
+        //---------------------------------------------
+        itemStacks.add(this.getEnchantStone());
+        itemStacks.add(this.getUlEnchantStone());
+        //---------------------------------------------
+        itemStacks.add(this.getAlchemyPickaxe_1());
+        //---------------------------------------------
+        itemStacks.add(this.getUltimateHelmet());
+        //---------------------------------------------
+        return itemStacks;
+    }
+
     public ItemStack getAlchemyWood(){
         List<String> lore = new ArrayList<>();
         lore.add("§7上古遗留的具有魔法力量的木头");
@@ -41,6 +58,13 @@ public class AlchemyItem {
         lore.add("§7目前支持提升的附魔请使用/alchemy enchantlist查询");
         lore.add("§7任何对此物件的改变都会使其魔法力量无效");
         return createItemStack(Material.DIAMOND,"§a附魔石",lore);
+    }
+
+    public ItemStack getUlEnchantStone(){
+        List<String> lore = new ArrayList<>();
+        lore.add("§7可使一本单附魔效果的附魔书中的附魔等级+1，无视系统等级上限");
+        lore.add("§7任何对此物件的改变都会使其魔法力量无效");
+        return createItemStack(Material.DIAMOND,"§d天佑石",lore);
     }
 
     public ItemStack getAlchemyStone_1(){
@@ -77,7 +101,7 @@ public class AlchemyItem {
 
     public ItemStack getUltimateHelmet(){
         List<String> lore = new ArrayList<>();
-        lore.add("§7终极头盔，消耗高级炼金石，免疫一次伤害，并使攻击者获得全部伤害反弹");
+        lore.add("§7终极头盔，消耗高级炼金石，免疫一次伤害，并使近战攻击者获得全部伤害反弹");
         lore.add("§7任何对此物件的改变都会使其魔法力量无效");
         return createItemStack(Material.TURTLE_HELMET,"§d终极头盔",lore);
     }

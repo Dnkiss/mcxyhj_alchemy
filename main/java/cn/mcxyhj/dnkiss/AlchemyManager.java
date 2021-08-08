@@ -14,6 +14,7 @@ import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 
 public class AlchemyManager {
@@ -60,6 +61,11 @@ public class AlchemyManager {
             EnchantmentStorageMeta enchantmentStorageMeta = (EnchantmentStorageMeta) mainHand.getItemMeta();
             Map<Enchantment,Integer> enchant = enchantmentStorageMeta.getStoredEnchants();
             if(enchant.size() == 1){
+                if(offHand.equals(Alchemy.alchemyItem.getUlEnchantStone())){
+                    p.sendMessage("§d天佑石的力量显现了");
+                    return true;
+                }
+
                 //效率
                 if(enchant.containsKey(Enchantment.DIG_SPEED)){
                     //5-7，消耗一颗附魔石
@@ -89,6 +95,14 @@ public class AlchemyManager {
             }
         }
         return false;
+    }
+
+    public String isEnchantSuccess(Player p){
+        String enchantResult = null;
+        EnchantmentStorageMeta enchantmentStorageMeta = (EnchantmentStorageMeta) p.getInventory().getItemInMainHand().getItemMeta();
+        int i = new Random().nextInt(100)+1;
+        //效率
+        return null;
     }
 
     public void doEnchant(Player p){
